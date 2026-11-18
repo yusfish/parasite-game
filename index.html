@@ -1000,7 +1000,7 @@ function renderBoard(){
  $('#boardList').innerHTML=rows.length?rows.map((r,i)=>`<li class="${r.me?'me':''}"><span class="rk">${i<3?['🥇','🥈','🥉'][i]:i+1}</span><span class="nm">${esc(r.name||'匿名')}${r.me?'（你）':''}</span><span class="sc">${Number(r.score)||0}</span><span class="dt">${r.t?esc(new Date(r.t).toLocaleDateString('zh-TW')):''}</span></li>`).join(''):'<li class="empty">還沒有紀錄，成為第一位挑戰者吧！</li>';
 }
 /* 全科共用排行榜：Google 試算表 + Apps Script（免登入） */
-const BOARD_API='__BOARD_API__';
+const BOARD_API='https://script.google.com/macros/s/AKfycbxtPOF9QbbsDj4uT07C2JOsz8o8sEHvcFeq0MIl5Ohe2Jf2BxkkqKQCyWHvDwLz1Gkm/exec';
 let MYID='';
 function myId(){let v=store.get('pe_uid');if(!v||!/^[a-z0-9-]{16,40}$/.test(v)){v=(crypto.randomUUID?crypto.randomUUID():Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,'0')).join(''));store.set('pe_uid',v);}return v;}
 async function myTag(id){try{const h=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode('pe:'+id)));return Array.from(h.slice(0,6),x=>x.toString(16).padStart(2,'0')).join('');}catch(e){return '';}}
